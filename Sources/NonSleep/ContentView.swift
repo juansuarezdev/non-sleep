@@ -34,9 +34,9 @@ struct ContentView: View {
             }
             Spacer()
             Circle()
-                .fill(controller.isRunning ? Brand.amber : Color.secondary.opacity(0.35))
+                .fill(controller.isRunning ? Brand.ink : Color.secondary.opacity(0.35))
                 .frame(width: 8, height: 8)
-                .shadow(color: controller.isRunning ? Brand.amber.opacity(0.8) : .clear, radius: 4)
+                .shadow(color: controller.isRunning ? Brand.ink.opacity(0.6) : .clear, radius: 4)
         }
     }
 
@@ -63,7 +63,7 @@ struct ContentView: View {
                 .background(.quaternary.opacity(0.6), in: RoundedRectangle(cornerRadius: 10))
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(fieldFocused ? Brand.amber.opacity(0.8) : .clear, lineWidth: 1.5)
+                        .strokeBorder(fieldFocused ? Brand.ink.opacity(0.8) : .clear, lineWidth: 1.5)
                 )
                 presetRow
             }
@@ -96,8 +96,8 @@ struct ContentView: View {
                     .buttonStyle(.plain)
                     .font(.system(.callout, design: .rounded).weight(.medium))
                     .frame(maxWidth: .infinity).padding(.vertical, 6)
-                    .background(selected ? Brand.amber.opacity(0.9) : Color.secondary.opacity(0.15), in: Capsule())
-                    .foregroundStyle(selected ? Brand.navy : Color.primary)
+                    .background(selected ? Brand.ink.opacity(0.9) : Color.secondary.opacity(0.15), in: Capsule())
+                    .foregroundStyle(selected ? Brand.onInk : Color.primary)
             }
         }
     }
@@ -109,14 +109,14 @@ struct ContentView: View {
                 Label("Lid closed", systemImage: "laptopcomputer")
                     .font(.subheadline.weight(.medium))
             }
-            .toggleStyle(.switch).tint(Brand.amber)
+            .toggleStyle(.switch).tint(.gray)
             .disabled(!available)
 
             Group {
                 if !available {
                     Text("Off by default. To enable it, run `scripts/install-lid-helper.sh` in the repo.")
                 } else if lidMode {
-                    Text("Use a hard, ventilated surface. Never a bag.").foregroundStyle(.orange)
+                    Text("Use a hard, ventilated surface. Never a bag.").foregroundStyle(.primary)
                 } else {
                     Text("Stay awake even when you shut the lid.")
                 }
@@ -151,7 +151,7 @@ struct ContentView: View {
                 ZStack {
                     Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 8)
                     Circle().trim(from: 0, to: fraction)
-                        .stroke(Brand.amber, style: StrokeStyle(lineWidth: 8, lineCap: .round))
+                        .stroke(Brand.ink, style: StrokeStyle(lineWidth: 8, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                     VStack(spacing: 2) {
                         Text(SessionMath.format(left))
@@ -166,7 +166,7 @@ struct ContentView: View {
             if case .running(_, let lid) = controller.state, lid {
                 Label("Lid mode on", systemImage: "laptopcomputer").font(.caption.weight(.medium))
                     .padding(.horizontal, 10).padding(.vertical, 4)
-                    .background(Color.orange.opacity(0.2), in: Capsule()).foregroundStyle(.orange)
+                    .background(Color.secondary.opacity(0.2), in: Capsule())
             }
 
             HStack(spacing: 8) {
@@ -211,10 +211,10 @@ struct AmberButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundStyle(enabled ? Brand.navy : Color.secondary)
+            .foregroundStyle(enabled ? Brand.onInk : Color.secondary)
             .background(
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(enabled ? Brand.amber : Color.secondary.opacity(0.18))
+                    .fill(enabled ? Brand.ink : Color.secondary.opacity(0.18))
                     .opacity(configuration.isPressed ? 0.8 : 1)
             )
     }
@@ -241,12 +241,12 @@ struct HoldToEndButton: View {
             .frame(maxWidth: .infinity).padding(.vertical, 8)
             .background(alignment: .leading) {
                 GeometryReader { geo in
-                    Rectangle().fill(Color.red.opacity(0.4)).frame(width: geo.size.width * progress)
+                    Rectangle().fill(Color.primary.opacity(0.3)).frame(width: geo.size.width * progress)
                 }
             }
-            .background(Color.red.opacity(0.12))
+            .background(Color.secondary.opacity(0.15))
             .clipShape(RoundedRectangle(cornerRadius: 10))
-            .foregroundStyle(Color.red)
+            .foregroundStyle(Color.primary)
             .onLongPressGesture(minimumDuration: 1, perform: {
                 holding = false; progress = 0; action()
             }, onPressingChanged: { pressing in

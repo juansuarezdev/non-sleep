@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Resources/logo.svg" alt="Non-Sleep: a white crescent moon crossed by an amber bar" width="112">
+  <img src="Resources/logo.svg" alt="Non-Sleep: a shaded grayscale crescent moon crossed by a light bar on a black tile" width="112">
 </p>
 
 <h1 align="center">Non-Sleep</h1>
@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <img alt="MIT license" src="https://img.shields.io/badge/License-MIT-14213D?style=flat-square">
-  <img alt="macOS 14 or later" src="https://img.shields.io/badge/macOS-14%2B-14213D?style=flat-square">
-  <img alt="Swift 6, no dependencies" src="https://img.shields.io/badge/Swift-6%20%C2%B7%200%20deps-FCA311?style=flat-square">
+  <img alt="MIT license" src="https://img.shields.io/badge/License-MIT-1C1C1E?style=flat-square">
+  <img alt="macOS 14 or later" src="https://img.shields.io/badge/macOS-14%2B-1C1C1E?style=flat-square">
+  <img alt="Swift 6, no dependencies" src="https://img.shields.io/badge/Swift-6%20%C2%B7%200%20deps-8E8E93?style=flat-square">
 </p>
 
 A small menu bar app. Type how long, press Enter, and your Mac stays awake until then.
