@@ -29,10 +29,10 @@ struct MenuBarLabel: View {
     var body: some View {
         if controller.isRunning {
             TimelineView(.periodic(from: .now, by: 1)) { _ in
-                Label(SessionMath.format(controller.remaining()), systemImage: "eye.fill")
+                Label(SessionMath.format(controller.remaining()), systemImage: "moon.fill")
             }
         } else {
-            Image(systemName: controller.needsAttention == nil ? "eye" : "exclamationmark.triangle")
+            Image(systemName: controller.needsAttention == nil ? "moon" : "exclamationmark.triangle")
         }
     }
 }

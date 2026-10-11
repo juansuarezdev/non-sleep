@@ -1,8 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="t d">
   <title id="t">Non-Sleep</title>
-  <desc id="d">An open amber eye with a crescent moon in the pupil on a deep navy tile.</desc>
-  <rect width="256" height="256" rx="58" fill="#14213D"/>
-  <path d="M28 128 Q128 36 228 128 Q128 220 28 128 Z" fill="#FCA311"/>
-  <circle cx="128" cy="128" r="42" fill="#14213D"/>
-  <path d="M138 104 A26 26 0 1 0 138 152 A20 20 0 1 1 138 104 Z" fill="#FCA311"/>
+  <desc id="d">A white crescent moon crossed by an amber bar on a deep navy tile.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1D2D50"/>
+      <stop offset="1" stop-color="#0E1830"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="58" fill="url(#bg)"/>
+  <g transform="translate(5 0)">
+    <path d="M133.7 66 A62 62 0 1 0 188.1 154.4 A52 52 0 1 1 133.7 66 Z" fill="#F5F7FA"/>
+    <line x1="74" y1="192" x2="184" y2="64" stroke="#16223F" stroke-width="22" stroke-linecap="round"/>
+    <line x1="74" y1="192" x2="184" y2="64" stroke="#FCA311" stroke-width="10" stroke-linecap="round"/>
+  </g>
 </svg>

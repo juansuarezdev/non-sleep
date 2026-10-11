@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Resources/logo.svg" alt="Non-Sleep: an open amber eye with a crescent moon in the pupil" width="112">
+  <img src="Resources/logo.svg" alt="Non-Sleep: a white crescent moon crossed by an amber bar" width="112">
 </p>
 
 <h1 align="center">Non-Sleep</h1>
@@ -41,7 +41,7 @@ The build is ad-hoc signed, so macOS may ask you to allow it the first time.
 
 ## Using it
 
-1. Click the eye in the menu bar.
+1. Click the moon in the menu bar.
 2. Type a duration (`90`, `45m`, `2h`, `1h30m`) or pick a preset, then press Enter.
 3. Add time with **+30m** / **+1h**. End early by **holding** "Hold to end" for one second.
 
