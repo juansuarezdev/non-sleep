@@ -74,7 +74,7 @@ struct ContentView: View {
                 Text(startTitle).font(.system(.body, design: .rounded).weight(.semibold))
                     .frame(maxWidth: .infinity).padding(.vertical, 6)
             }
-            .buttonStyle(AmberButtonStyle())
+            .buttonStyle(InkButtonStyle())
             .keyboardShortcut(.defaultAction)
             .disabled(parsed == nil)
         }
@@ -206,7 +206,7 @@ struct ContentView: View {
 
 // MARK: - Styles
 
-struct AmberButtonStyle: ButtonStyle {
+struct InkButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var enabled
 
     func makeBody(configuration: Configuration) -> some View {
