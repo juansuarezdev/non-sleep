@@ -16,6 +16,9 @@ public final class SessionController {
     /// Set when something could not be undone. Cleared by a successful restore.
     public private(set) var needsAttention: String?
 
+    /// Length of the running session including extensions. Drives the progress ring.
+    public private(set) var totalDuration: TimeInterval = 0
+
     public var rules: FloorRules
 
     @ObservationIgnored private let assertion: SleepAssertion
@@ -71,6 +74,7 @@ public final class SessionController {
             throw error
         }
         lastEndReason = nil
+        totalDuration = duration
         state = .running(endsAt: endsAt, lidMode: lidMode)
     }
 
@@ -78,6 +82,7 @@ public final class SessionController {
         guard case .running(let endsAt, let lidMode) = state, interval > 0 else { return }
         let cap = now().addingTimeInterval(SessionMath.maxDuration)
         let newEnd = min(endsAt.addingTimeInterval(interval), cap)
+        totalDuration += newEnd.timeIntervalSince(endsAt)
         state = .running(endsAt: newEnd, lidMode: lidMode)
         if lidMode { try? journal.write(JournalEntry(lidModeEnabled: true, endsAt: newEnd)) }
     }
