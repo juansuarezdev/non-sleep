@@ -9,7 +9,7 @@ enum Brand {
 }
 
 /// The logo mark (shaded crescent crossed by a bar), drawn as vectors so it stays sharp at any size.
-/// Geometry matches Resources/logo.svg.
+/// Geometry matches Resources/icon.svg.
 struct MoonMark: View {
     var body: some View {
         Canvas { ctx, size in

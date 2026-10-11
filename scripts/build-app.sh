@@ -12,7 +12,7 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN" "$APP/Contents/MacOS/NonSleep"
 
 ICONSET="$(mktemp -d)/AppIcon.iconset"
-swift scripts/render-icon.swift Resources/logo.svg "$ICONSET"
+swift scripts/render-icon.swift Resources/icon.svg "$ICONSET"
 iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
 
 cat > "$APP/Contents/Info.plist" <<PLIST

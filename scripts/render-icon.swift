@@ -1,4 +1,4 @@
-// Renders Resources/logo.svg into Resources/AppIcon.iconset PNGs. Usage: swift scripts/render-icon.swift <svg> <iconset dir>
+// Renders Resources/icon.svg into Resources/AppIcon.iconset PNGs. Usage: swift scripts/render-icon.swift <svg> <iconset dir>
 import AppKit
 
 let args = CommandLine.arguments

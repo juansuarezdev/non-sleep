@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Resources/logo.svg" alt="Non-Sleep: a shaded grayscale crescent moon crossed by a light bar on a black tile" width="112">
+  <img src="Resources/icon.svg" alt="Non-Sleep: a shaded grayscale crescent moon crossed by a light bar on a black tile" width="112">
 </p>
 
 <h1 align="center">Non-Sleep</h1>
