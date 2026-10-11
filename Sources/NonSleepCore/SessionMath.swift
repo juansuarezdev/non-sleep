@@ -2,7 +2,7 @@ import Foundation
 
 /// Duration parsing and formatting. Pure functions.
 public enum SessionMath {
-    /// Longest session Vigil accepts.
+    /// Longest session Non-Sleep accepts.
     public static let maxDuration: TimeInterval = 7 * 86_400
 
     /// Parses "90" (minutes), "45m", "2h", "1h30m", "1d2h". Returns nil when invalid or zero.

@@ -1,5 +1,5 @@
 import Testing
-@testable import VigilCore
+@testable import NonSleepCore
 
 @Suite struct FloorRulesTests {
     let rules = FloorRules(batteryFloor: 10)

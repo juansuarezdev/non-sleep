@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="Resources/logo.svg" alt="Vigil: an open amber eye with a crescent moon in the pupil" width="112">
+  <img src="Resources/logo.svg" alt="Non-Sleep: an open amber eye with a crescent moon in the pupil" width="112">
 </p>
 
-<h1 align="center">Vigil</h1>
+<h1 align="center">Non-Sleep</h1>
 
 <p align="center">
   <strong>Keep your Mac awake. Give the session an end time.</strong>
@@ -24,17 +24,17 @@ It stops by itself when time is up, when the battery gets low, or when the Mac r
 | Stays awake | Yes | Yes, even with the lid shut |
 | Needs sudo | No | Yes, once, through a script you run yourself |
 | How | IOKit power assertion | `pmset disablesleep` |
-| If Vigil crashes | The kernel drops the assertion | A backstop agent turns it off |
+| If Non-Sleep crashes | The kernel drops the assertion | A backstop agent turns it off |
 
 ## Install
 
 Needs Xcode (Swift 6) on an Apple Silicon Mac with macOS 14 or later.
 
 ```bash
-git clone https://github.com/juansuarezdev/vigil.git
-cd vigil
+git clone https://github.com/juansuarezdev/non-sleep.git
+cd non-sleep
 ./scripts/build-app.sh
-open dist/Vigil.app
+open dist/NonSleep.app
 ```
 
 The build is ad-hoc signed, so macOS may ask you to allow it the first time.
@@ -59,14 +59,14 @@ It adds a sudoers rule for exactly two commands and a launchd backstop. Read the
 the script first. To remove everything: `./scripts/uninstall-lid-helper.sh`.
 
 > **Safety.** A Mac that stays awake with the lid shut can overheat in a bag or on a bed.
-> Keep it on a hard, ventilated surface. Vigil ends the session at serious heat in lid mode
+> Keep it on a hard, ventilated surface. Non-Sleep ends the session at serious heat in lid mode
 > and at critical heat always, but that is a safety net, not a guarantee.
 
 ## What it will not do
 
 - No network access, no telemetry, no accounts.
 - No background daemon unless you install the lid helper.
-- The sudoers rule can be used by any program running as you, not only Vigil.
+- The sudoers rule can be used by any program running as you, not only Non-Sleep.
 
 ## How it works
 
@@ -76,7 +76,7 @@ See [docs/how-it-works.md](docs/how-it-works.md).
 
 ```bash
 swift test        # unit tests for the logic
-swift run Vigil   # run without bundling
+swift run NonSleep   # run without bundling
 ```
 
 ## License

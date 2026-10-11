@@ -1,10 +1,10 @@
 #!/bin/bash
-# Vigil backstop. Run every 60s by a LaunchAgent. If lid mode could still be on with nobody
+# Non-Sleep backstop. Run every 60s by a LaunchAgent. If lid mode could still be on with nobody
 # in charge of turning it off (app gone, or session overdue), turn it off and clear the journal.
 set -u
-SUPPORT="$HOME/Library/Application Support/Vigil"
+SUPPORT="$HOME/Library/Application Support/NonSleep"
 JOURNAL="$SUPPORT/journal.json"
-LOG="$HOME/Library/Logs/Vigil/backstop.log"
+LOG="$HOME/Library/Logs/NonSleep/backstop.log"
 GRACE=120   # seconds past endsAt before we step in while the app is still running
 umask 077
 mkdir -p "$(dirname "$LOG")"
@@ -18,7 +18,7 @@ ends="$(/bin/date -j -u -f '%Y-%m-%dT%H:%M:%SZ' "$ends_raw" +%s 2>/dev/null || e
 now="$(/bin/date +%s)"
 
 reason=""
-/usr/bin/pgrep -x Vigil >/dev/null || reason="app not running"
+/usr/bin/pgrep -x NonSleep >/dev/null || reason="app not running"
 (( now > ends + GRACE )) && reason="${reason:-session overdue}"
 [[ -n "$reason" ]] || exit 0
 

@@ -52,15 +52,15 @@ public final class SessionController {
     // MARK: - Commands
 
     public func start(duration: TimeInterval, lidMode: Bool) throws {
-        guard !isRunning else { throw VigilError("A session is already running") }
+        guard !isRunning else { throw NonSleepError("A session is already running") }
         guard duration > 0, duration <= SessionMath.maxDuration else {
-            throw VigilError("Duration must be between 1 minute and 7 days")
+            throw NonSleepError("Duration must be between 1 minute and 7 days")
         }
         let endsAt = now().addingTimeInterval(duration)
 
         if lidMode {
             guard lid.isAvailable else {
-                throw VigilError("Lid mode is not set up. Run scripts/install-lid-helper.sh")
+                throw NonSleepError("Lid mode is not set up. Run scripts/install-lid-helper.sh")
             }
             // Journal first: if we die between here and the end, the next launch undoes it.
             try journal.write(JournalEntry(lidModeEnabled: true, endsAt: endsAt))
@@ -117,7 +117,7 @@ public final class SessionController {
     /// Call on app termination.
     public func shutdown() {
         ticker?.cancel()
-        stop(reason: "Vigil quit")
+        stop(reason: "Non-Sleep quit")
     }
 
     // MARK: - Recovery

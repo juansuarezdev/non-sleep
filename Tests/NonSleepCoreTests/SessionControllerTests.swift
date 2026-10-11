@@ -1,11 +1,11 @@
 import Foundation
 import Testing
-@testable import VigilCore
+@testable import NonSleepCore
 
 final class FakeAssertion: SleepAssertion {
     var held = false
     var failAcquire = false
-    func acquire() throws { if failAcquire { throw VigilError("nope") }; held = true }
+    func acquire() throws { if failAcquire { throw NonSleepError("nope") }; held = true }
     func release() { held = false }
 }
 
@@ -15,8 +15,8 @@ final class FakeLid: LidControl {
     var failDisable = false
     var failEnable = false
     func setEnabled(_ on: Bool) throws {
-        if on && failEnable { throw VigilError("enable failed") }
-        if !on && failDisable { throw VigilError("disable failed") }
+        if on && failEnable { throw NonSleepError("enable failed") }
+        if !on && failDisable { throw NonSleepError("disable failed") }
         enabled = on
     }
 }
@@ -37,7 +37,7 @@ struct Rig {
     init(journalEntry: JournalEntry? = nil, lidStartsEnabled: Bool = false) {
         l.enabled = lidStartsEnabled
         journal = Journal(url: FileManager.default.temporaryDirectory
-            .appendingPathComponent("vigil-test-\(UUID().uuidString)/journal.json"))
+            .appendingPathComponent("nonsleep-test-\(UUID().uuidString)/journal.json"))
         if let journalEntry { try? journal.write(journalEntry) }
         let clock = self.clock
         c = SessionController(assertion: a, lid: l, power: p, journal: journal, now: { clock.date })
@@ -58,10 +58,10 @@ struct Rig {
 
     @Test func rejectsBadDurationsAndDoubleStart() throws {
         let r = Rig()
-        #expect(throws: VigilError.self) { try r.c.start(duration: 0, lidMode: false) }
-        #expect(throws: VigilError.self) { try r.c.start(duration: SessionMath.maxDuration + 1, lidMode: false) }
+        #expect(throws: NonSleepError.self) { try r.c.start(duration: 0, lidMode: false) }
+        #expect(throws: NonSleepError.self) { try r.c.start(duration: SessionMath.maxDuration + 1, lidMode: false) }
         try r.c.start(duration: 60, lidMode: false)
-        #expect(throws: VigilError.self) { try r.c.start(duration: 60, lidMode: false) }
+        #expect(throws: NonSleepError.self) { try r.c.start(duration: 60, lidMode: false) }
     }
 
     @Test func lowBatteryEndsSession() throws {
@@ -81,7 +81,7 @@ struct Rig {
 
     @Test func lidModeRefusedWhenUnavailable() {
         let r = Rig(); r.l.isAvailable = false
-        #expect(throws: VigilError.self) { try r.c.start(duration: 60, lidMode: true) }
+        #expect(throws: NonSleepError.self) { try r.c.start(duration: 60, lidMode: true) }
         #expect(r.journal.read() == nil && !r.a.held)
     }
 
@@ -103,13 +103,13 @@ struct Rig {
 
     @Test func failedEnableLeavesNothingBehind() {
         let r = Rig(); r.l.failEnable = true
-        #expect(throws: VigilError.self) { try r.c.start(duration: 60, lidMode: true) }
+        #expect(throws: NonSleepError.self) { try r.c.start(duration: 60, lidMode: true) }
         #expect(!r.c.isRunning && !r.a.held && r.journal.read() == nil)
     }
 
     @Test func failedAssertionUndoesLidMode() {
         let r = Rig(); r.a.failAcquire = true
-        #expect(throws: VigilError.self) { try r.c.start(duration: 60, lidMode: true) }
+        #expect(throws: NonSleepError.self) { try r.c.start(duration: 60, lidMode: true) }
         #expect(!r.l.enabled && r.journal.read() == nil)
     }
 

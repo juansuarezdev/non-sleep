@@ -14,9 +14,9 @@ public final class IOKitSleepAssertion: SleepAssertion {
         let result = IOPMAssertionCreateWithName(
             kIOPMAssertionTypePreventUserIdleSystemSleep as CFString,
             IOPMAssertionLevel(kIOPMAssertionLevelOn),
-            "Vigil timed awake session" as CFString,
+            "Non-Sleep timed awake session" as CFString,
             &id)
-        guard result == kIOReturnSuccess else { throw VigilError("Could not hold the Mac awake (IOKit \(result))") }
+        guard result == kIOReturnSuccess else { throw NonSleepError("Could not hold the Mac awake (IOKit \(result))") }
         held = true
     }
 
@@ -43,7 +43,7 @@ public final class PmsetLidControl: LidControl {
 
     public func setEnabled(_ enabled: Bool) throws {
         let status = Self.run(sudo, ["-n", pmset, "-a", "disablesleep", enabled ? "1" : "0"])
-        guard status == 0 else { throw VigilError("pmset disablesleep \(enabled ? 1 : 0) failed (exit \(status))") }
+        guard status == 0 else { throw NonSleepError("pmset disablesleep \(enabled ? 1 : 0) failed (exit \(status))") }
     }
 
     private static func run(_ path: String, _ args: [String]) -> Int32 {

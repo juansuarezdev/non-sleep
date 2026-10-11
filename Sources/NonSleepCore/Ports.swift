@@ -17,7 +17,7 @@ public protocol PowerSource: AnyObject {
     func snapshot() -> PowerSnapshot
 }
 
-public struct VigilError: Error, LocalizedError, Equatable {
+public struct NonSleepError: Error, LocalizedError, Equatable {
     public let message: String
     public init(_ message: String) { self.message = message }
     public var errorDescription: String? { message }

@@ -1,5 +1,5 @@
 import SwiftUI
-import VigilCore
+import NonSleepCore
 
 struct ContentView: View {
     let controller: SessionController
@@ -28,7 +28,7 @@ struct ContentView: View {
         HStack(spacing: 10) {
             LogoTile(size: 30)
             VStack(alignment: .leading, spacing: 1) {
-                Text("Vigil").font(.system(.headline, design: .rounded))
+                Text("Non-Sleep").font(.system(.headline, design: .rounded))
                 Text(controller.isRunning ? "Keeping your Mac awake" : "Ready")
                     .font(.caption).foregroundStyle(.secondary)
             }

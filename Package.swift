@@ -2,19 +2,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "Vigil",
+    name: "NonSleep",
     platforms: [.macOS(.v14)],
     targets: [
-        .target(name: "VigilCore", path: "Sources/VigilCore"),
+        .target(name: "NonSleepCore", path: "Sources/NonSleepCore"),
         .executableTarget(
-            name: "Vigil",
-            dependencies: ["VigilCore"],
-            path: "Sources/Vigil"
+            name: "NonSleep",
+            dependencies: ["NonSleepCore"],
+            path: "Sources/NonSleep"
         ),
         .testTarget(
-            name: "VigilCoreTests",
-            dependencies: ["VigilCore"],
-            path: "Tests/VigilCoreTests"
+            name: "NonSleepCoreTests",
+            dependencies: ["NonSleepCore"],
+            path: "Tests/NonSleepCoreTests"
         ),
     ]
 )

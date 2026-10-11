@@ -1,8 +1,8 @@
 import SwiftUI
-import VigilCore
+import NonSleepCore
 
 @main
-struct VigilApp: App {
+struct NonSleepApp: App {
     @State private var controller: SessionController
 
     init() {

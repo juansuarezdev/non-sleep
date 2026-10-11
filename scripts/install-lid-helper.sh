@@ -1,19 +1,19 @@
 #!/bin/bash
-# Opt-in setup for Vigil's lid-closed mode. Run it yourself; it asks for your password once (sudo).
+# Opt-in setup for Non-Sleep's lid-closed mode. Run it yourself; it asks for your password once (sudo).
 # Installs:
-#   1. /etc/sudoers.d/vigil     lets YOUR USER run exactly two commands without a password:
+#   1. /etc/sudoers.d/non-sleep     lets YOUR USER run exactly two commands without a password:
 #                                 /usr/bin/pmset -a disablesleep 1
 #                                 /usr/bin/pmset -a disablesleep 0
-#                               Any program running as you can use this rule, not only Vigil.
+#                               Any program running as you can use this rule, not only Non-Sleep.
 #   2. A LaunchAgent that runs backstop.sh every minute and undoes lid mode if the app died.
 # Undo everything with scripts/uninstall-lid-helper.sh.
 set -euo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SUPPORT="$HOME/Library/Application Support/Vigil"
-PLIST="$HOME/Library/LaunchAgents/com.juansuarezdev.vigil.backstop.plist"
-LABEL="com.juansuarezdev.vigil.backstop"
-RULE=/etc/sudoers.d/vigil
+SUPPORT="$HOME/Library/Application Support/NonSleep"
+PLIST="$HOME/Library/LaunchAgents/com.juansuarezdev.nonsleep.backstop.plist"
+LABEL="com.juansuarezdev.nonsleep.backstop"
+RULE=/etc/sudoers.d/non-sleep
 
 [[ "$(id -u)" != 0 ]] || { echo "Run as your normal user, not root."; exit 1; }
 
@@ -48,4 +48,4 @@ cat > "$PLIST" <<PLISTEOF
 PLISTEOF
 launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null || true
 launchctl bootstrap "gui/$(id -u)" "$PLIST"
-echo "Backstop agent loaded. Lid mode is now available in Vigil."
+echo "Backstop agent loaded. Lid mode is now available in Non-Sleep."

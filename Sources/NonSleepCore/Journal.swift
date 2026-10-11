@@ -19,7 +19,7 @@ public struct Journal: Sendable {
 
     public static var `default`: Journal {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        return Journal(url: base.appendingPathComponent("Vigil/journal.json"))
+        return Journal(url: base.appendingPathComponent("NonSleep/journal.json"))
     }
 
     public func read() -> JournalEntry? {
